@@ -1,23 +1,27 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
+<div class="is-flex is-flex-direction-column" style="min-height: 100vh;">
     
-    <header>
+    <header class="hero is-dark">
+        <div class="hero-body">
+
         <h1>Midnight Groove</h1>
 
         <p>Classic records</p>
 
         <NavMenu />
 
+        </div>
+
     </header>
 
-    <main>
+    <main class="section is-flex-grow-1">
 
          @Body
          
     </main>
 
-    <footer>
+    <footer class="footer has-text-centered">
         
         <p>Nazmul Hussain - @DateTime.Now.Year</p>
 
