@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37216.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordShop.Web", "RecordShop.Web\RecordShop.Web\RecordShop.Web.csproj", "{16B7DC84-57E4-4735-85E2-89DCB9C83699}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordShop.Web.Client", "RecordShop.Web\RecordShop.Web.Client\RecordShop.Web.Client.csproj", "{9DAC87B0-457E-4638-BD27-7660A219276A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16B7DC84-57E4-4735-85E2-89DCB9C83699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16B7DC84-57E4-4735-85E2-89DCB9C83699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16B7DC84-57E4-4735-85E2-89DCB9C83699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16B7DC84-57E4-4735-85E2-89DCB9C83699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DAC87B0-457E-4638-BD27-7660A219276A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DAC87B0-457E-4638-BD27-7660A219276A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DAC87B0-457E-4638-BD27-7660A219276A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DAC87B0-457E-4638-BD27-7660A219276A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DEFD5988-E259-4F1E-8064-A4EC642A12CB}
+	EndGlobalSection
+EndGlobal
