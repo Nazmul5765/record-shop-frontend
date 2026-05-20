@@ -9,79 +9,10 @@
     Browse albums, check stock, and discover your next favourite record.
 </p>
 
-<RecordSummary Record="testRecord" />
 
-<RecordsSummaryList Records="listOfRecords" />
-
+<RecordsLoader />
 
 @code
 {
-    private Record testRecord = new Record
-        {
-            Id = 1,
-            Title = "Thriller",
-            Artist = "Michael Jackson",
-            Genre = "Pop",
-            ReleaseYear = 1982,
-            Price = 9.99m,
-            StockQuantity = 10
-        };
-
-    private List<Record> listOfRecords = new()
-{
-    new Record
-    {
-        Id = 1,
-        Title = "Thriller",
-        Artist = "Michael Jackson",
-        Genre = "Pop",
-        ReleaseYear = 1982,
-        Price = 9.99m,
-        StockQuantity = 12
-    },
-
-    new Record
-    {
-        Id = 2,
-        Title = "Back in Black",
-        Artist = "AC/DC",
-        Genre = "Rock",
-        ReleaseYear = 1980,
-        Price = 11.99m,
-        StockQuantity = 8
-    },
-
-    new Record
-    {
-        Id = 3,
-        Title = "1989",
-        Artist = "Taylor Swift",
-        Genre = "Pop",
-        ReleaseYear = 2014,
-        Price = 13.99m,
-        StockQuantity = 15
-    },
-
-    new Record
-    {
-        Id = 4,
-        Title = "Random Access Memories",
-        Artist = "Daft Punk",
-        Genre = "Electronic",
-        ReleaseYear = 2013,
-        Price = 14.99m,
-        StockQuantity = 6
-    },
-
-    new Record
-    {
-        Id = 5,
-        Title = "The Eminem Show",
-        Artist = "Eminem",
-        Genre = "Hip-Hop",
-        ReleaseYear = 2002,
-        Price = 10.99m,
-        StockQuantity = 10
-    }
-};
+   
 }

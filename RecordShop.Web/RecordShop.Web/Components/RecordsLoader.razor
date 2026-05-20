@@ -1,0 +1,41 @@
+﻿@using RecordShop.Web.Models
+@using System.Net.Http.Json
+
+<h3>Records</h3>
+
+@if (errorMessage != null)
+{
+    <p class="has-text-danger">@errorMessage</p>
+}
+else if (records == null)
+{
+    <p>Loading records...</p>
+}
+else
+{
+    <RecordsSummaryList Records="records" />
+}
+
+@code {
+    private List<Record>? records;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+        try
+        {
+            var http = new HttpClient();
+
+                records = await http.GetFromJsonAsync<List<Record>>(
+                "https://localhost:7060/api/albums"
+
+            );
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Could not load records: {ex.Message}";
+        }
+        
+    }
+}
