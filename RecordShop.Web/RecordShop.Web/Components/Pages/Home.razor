@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using RecordShop.Web.Models
 
 <PageTitle>Home</PageTitle>
 
@@ -8,3 +9,19 @@
     Browse albums, check stock, and discover your next favourite record.
 </p>
 
+<RecordSummary Record="testRecord" />
+
+
+@code
+{
+    private Record testRecord = new Record
+        {
+            Id = 1,
+            Title = "Thriller",
+            Artist = "Michael Jackson",
+            Genre = "Pop",
+            ReleaseYear = 1982,
+            Price = 9.99m,
+            StockQuantity = 10
+        };
+}
