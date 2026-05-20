@@ -1,5 +1,13 @@
-﻿<h3>RecordsSummaryList</h3>
+﻿@using RecordShop.Web.Models
+@using RecordShop.Web.Components
+<h3>RecordsSummaryList</h3>
+
+@foreach (Record record in Records)
+{
+        <RecordSummary Record="record" />
+}
 
 @code {
-
+    [Parameter]
+    public List<Record> Records { get; set; } = default!;
 }
