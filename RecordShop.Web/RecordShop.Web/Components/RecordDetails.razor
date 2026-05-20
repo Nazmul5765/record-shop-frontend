@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using RecordShop.Web.Models
+<h3>RecordDetails</h3>
+<h4>@Record.Title</h4>
+<h4>@Record.Artist</h4>
+<h4>@Record.Genre</h4>
+<h4>@Record.ReleaseYear</h4>
+<h4>@Record.Price</h4>
+<h4>@Record.StockQuantity</h4>
+
+<EditForm Model="Record">
+<InputText @bind-Value="Record.Title" />
+<InputText @bind-Value="Record.Artist" />
+<InputText @bind-Value="Record.Genre" />
+<InputNumber @bind-Value="Record.ReleaseYear" />
+<InputNumber @bind-Value="Record.Price" />
+<InputNumber @bind-Value="Record.StockQuantity" />
+<button type="button" @onclick="SaveChanges">Save Changes</button>
+
+</EditForm>
+
+@if (savedMessage != null)
+{
+    <p>@savedMessage</p>
+}
+
+
+@code {
+    private string? savedMessage;
+    [Parameter]
+    public Record Record { get; set; } = default!;
+
+    private void SaveChanges()
+    {
+        savedMessage = $"Saved: {Record.Title} by {Record.Artist}";
+    }
+}
