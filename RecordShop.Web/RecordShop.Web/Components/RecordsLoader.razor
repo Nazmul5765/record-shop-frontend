@@ -1,7 +1,8 @@
 ﻿@using RecordShop.Web.Models
+@using RecordShop.Web.Components
 @using System.Net.Http.Json
 
-<h3>Records</h3>
+@* <h3>Records</h3> *@
 
 @if (errorMessage != null)
 {
@@ -14,7 +15,8 @@ else if (records == null)
 else
 {
      <RecordsSummaryList Records="records" /> 
-     <RecordDetails Record="records[0]" /> 
+     @* <p> @records.Count </p> *@
+     @* <RecordDetails Record="records[0]" />  *@
 
 }
 

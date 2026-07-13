@@ -1,0 +1,44 @@
+﻿@using RecordShop.Web.Components
+@using RecordShop.Web.Models
+@using System.Net.Http.Json
+
+<h3>RecordLoader</h3>
+
+@if (errorMessage != null)
+{
+    @errorMessage
+}
+else if (record == null)
+{
+    <p>Record Loading...</p>
+}
+else
+{
+    <RecordDetails Record="record" />
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private Record? record;
+
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var http = new HttpClient();
+
+            record = await http.GetFromJsonAsync<Record>(
+            $"https://localhost:7060/api/albums/{Id}"
+
+            );
+
+        } catch (Exception ex)
+        {
+            errorMessage = $"could not load record: {ex.Message}";
+        }
+    }
+
+}
