@@ -2,8 +2,6 @@
 @using RecordShop.Web.Components
 @using System.Net.Http.Json
 
-@* <h3>Records</h3> *@
-
 @if (errorMessage != null)
 {
     <p class="has-text-danger">@errorMessage</p>
@@ -15,8 +13,7 @@ else if (records == null)
 else
 {
      <RecordsSummaryList Records="records" /> 
-     @* <p> @records.Count </p> *@
-     @* <RecordDetails Record="records[0]" />  *@
+
 
 }
 

@@ -1,8 +1,10 @@
 ﻿@using RecordShop.Web.Models
-<h3>RecordSummary</h3>
-<h4>@Record.Title</h4> 
-<h4>@Record.Artist</h4>
-<h4>@Record.Genre</h4> 
+    <NavLink href="@($"/records/{Record.Id}")">
+        <h4>@Record.Title</h4>
+        <h4>@Record.Artist</h4>
+        <h4>@Record.Genre</h4>
+    </NavLink>
+
 
 @code {
     [Parameter]
