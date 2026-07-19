@@ -10,13 +10,21 @@
 <h4>@Record.StockQuantity</h4>
 
 <EditForm Model="Record" OnValidSubmit="SaveChanges">
-<InputText @bind-Value="Record.Title" />
-<InputText @bind-Value="Record.Artist" />
-<InputText @bind-Value="Record.Genre" />
-<InputNumber @bind-Value="Record.ReleaseYear" />
-<InputNumber @bind-Value="Record.Price" />
-<InputNumber @bind-Value="Record.StockQuantity" />
-<button type="submit">Save Changes</button>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <label>Title</label>
+    <InputText @bind-Value="Record.Title" />
+    <label>Artist</label>
+    <InputText @bind-Value="Record.Artist" />
+    <label>Genre</label>
+    <InputText @bind-Value="Record.Genre" />
+    <label>ReleaseYear</label>
+    <InputNumber @bind-Value="Record.ReleaseYear" />
+    <label>Price</label>
+    <InputNumber @bind-Value="Record.Price" />
+    <label>StockQuantity</label>
+    <InputNumber @bind-Value="Record.StockQuantity" />
+    <button type="submit">Save Changes</button>
 
 </EditForm>
 

@@ -7,6 +7,8 @@
 
 
 <EditForm Model="newRecord" OnValidSubmit="submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
     <label>Title</label>
     <InputText @bind-Value="newRecord.Title" />
     <label>Artist</label>
