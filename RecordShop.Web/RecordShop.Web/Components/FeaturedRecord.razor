@@ -1,5 +1,54 @@
-﻿<h3>FeaturedRecord</h3>
+﻿@using RecordShop.Web.Models
+@using RecordShop.Web.Components
+<h3>FeaturedRecord</h3>
+
+
+
+@if (errorMessage != null)
+{
+    <p>@errorMessage</p>
+}
+else if (featuredRecord == null)
+{
+    <p>Loading records</p>
+}
+else
+{
+    <RecordSummary Record="featuredRecord" />
+}
+
 
 @code {
+    private Record? featuredRecord;
+    private string? errorMessage;
+    private List<Record>? records;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            HttpClient httpClient = new HttpClient();
+
+            records = await httpClient.GetFromJsonAsync<List<Record>>(
+                "https://localhost:7060/api/albums"
+            );
+
+
+            if (records == null || records.Count == 0)
+            {
+                errorMessage = "No records found";
+            } 
+            else
+            {
+                Random random = new Random();
+                var index = random.Next(records.Count);
+                featuredRecord = records[index];
+            }
+
+        } catch (Exception ex)
+        {
+            errorMessage = $"Could not load records:... {ex.Message}";
+        }
+    }
 
 }
