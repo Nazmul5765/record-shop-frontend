@@ -12,7 +12,10 @@ else if (records == null)
 }
 else
 {
-     <RecordsSummaryList Records="records" /> 
+    <CascadingValue Value="records">
+        @ChildContent
+    </CascadingValue>
+     
 
 
 }
@@ -20,6 +23,8 @@ else
 @code {
     private List<Record>? records;
     private string? errorMessage;
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

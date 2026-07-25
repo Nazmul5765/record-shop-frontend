@@ -1,12 +1,23 @@
 ﻿@using RecordShop.Web.Models
 @using RecordShop.Web.Components
 
-@foreach (Record record in Records)
+@if (Records == null)
 {
+    <p>Loading records ...</p>
+}
+else if (Records.Count == 0)
+{
+    <p>No record found.</p>
+}
+else
+{
+    @foreach (Record record in Records)
+    {
         <RecordSummary Record="record" />
+    }
 }
 
 @code {
-    [Parameter]
-    public List<Record> Records { get; set; } = default!;
+    [CascadingParameter]
+    public List<Record>? Records { get; set; }
 }

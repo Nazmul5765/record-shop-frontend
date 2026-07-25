@@ -21,33 +21,28 @@ else
 @code {
     private Record? featuredRecord;
     private string? errorMessage;
-    private List<Record>? records;
+    [CascadingParameter]
+    public List<Record>? Records { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnParametersSet()
     {
         try
         {
-            HttpClient httpClient = new HttpClient();
 
-            records = await httpClient.GetFromJsonAsync<List<Record>>(
-                "https://localhost:7060/api/albums"
-            );
-
-
-            if (records == null || records.Count == 0)
+            if (Records == null || Records.Count == 0)
             {
                 errorMessage = "No records found";
             } 
             else
             {
                 Random random = new Random();
-                var index = random.Next(records.Count);
-                featuredRecord = records[index];
+                var index = random.Next(Records.Count);
+                featuredRecord = Records[index];
             }
 
         } catch (Exception ex)
         {
-            errorMessage = $"Could not load records:... {ex.Message}";
+            errorMessage = $"Could not load featured record: {ex.Message}";
         }
     }
 
