@@ -1,0 +1,51 @@
+﻿@using RecordShop.Web.Components
+@using RecordShop.Web.Models
+<h3>SearchById</h3>
+
+
+    <InputNumber @bind-Value="Id"></InputNumber>
+    <button type="button" @onclick="_searchById">Search</button>
+
+
+
+@if (_errorMessage != null)
+{
+    <p>@_errorMessage</p>
+}
+else if (Record != null)
+{
+    <RecordSummary Record="Record" />
+}
+
+@code {
+    public int Id { get; set; }
+    public Record? Record { get; set; } 
+    private string? _errorMessage;
+
+    private async Task _searchById()
+    {
+        try
+        {
+            if (Id <= 0)
+            {
+                _errorMessage = "Enter a valid Id";
+                Record = null;
+                return;
+            }
+            HttpClient httpClient = new HttpClient();
+
+            Record = await httpClient.GetFromJsonAsync<Record>(
+                $"https://localhost:7060/api/albums/{Id}"
+            );
+
+            _errorMessage = null;
+
+
+        } catch (Exception ex)
+        {
+            Record = null;
+            _errorMessage = "No record found with that Id";
+        }
+    }
+
+}
