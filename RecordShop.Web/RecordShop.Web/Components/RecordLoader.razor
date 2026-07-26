@@ -2,15 +2,15 @@
 @using RecordShop.Web.Models
 @using System.Net.Http.Json
 
-<h3>RecordLoader</h3>
-
 @if (errorMessage != null)
 {
-    @errorMessage
+    <div class="alert alert-warning">
+        @errorMessage
+    </div>
 }
 else if (record == null)
 {
-    <p>Record Loading...</p>
+    <p class="text-light opacity-75">Loading record...</p>
 }
 else
 {

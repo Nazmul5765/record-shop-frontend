@@ -1,7 +1,7 @@
 @using RecordShop.Web.Models
 @using RecordShop.Web.Components
 
-<h2 class="mb-3">Featured Record</h2>
+<h2 class="mb-3 text-white fw-bold">Featured Record</h2>
 
 @if (errorMessage != null)
 {
@@ -11,7 +11,7 @@
 }
 else if (featuredRecord == null)
 {
-    <p class="text-muted">Loading records...</p>
+    <p class="text-light opacity-75">Loading records...</p>
 }
 else
 {

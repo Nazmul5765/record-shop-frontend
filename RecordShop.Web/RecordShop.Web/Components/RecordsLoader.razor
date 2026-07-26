@@ -4,11 +4,13 @@
 
 @if (errorMessage != null)
 {
-    <p>@errorMessage</p>
+    <div class="alert alert-warning">
+        @errorMessage
+    </div>
 }
 else if (records == null)
 {
-    <p>Loading records...</p>
+    <p class="text-light opacity-75">Loading records...</p>
 }
 else
 {

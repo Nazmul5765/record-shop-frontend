@@ -3,11 +3,13 @@
 
 @if (Records == null)
 {
-    <p>Loading records ...</p>
+    <p class="text-light opacity-75">Loading records...</p>
 }
 else if (Records.Count == 0)
 {
-    <p>No record found.</p>
+    <div class="alert alert-warning">
+        No records found.
+    </div>
 }
 else
 {
