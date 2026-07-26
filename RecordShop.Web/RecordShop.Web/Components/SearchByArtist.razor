@@ -1,0 +1,56 @@
+﻿@using RecordShop.Web.Components
+@using RecordShop.Web.Models
+<h3>SearchByArtist</h3>
+
+
+<InputText @bind-Value="Artist"></InputText>
+<button type="button" @onclick="_searchByArtist">Search</button>
+
+
+
+@if (_errorMessage != null)
+{
+    <p>@_errorMessage</p>
+}
+else if (Records != null)
+{
+    @foreach (Record record in Records)
+    {
+        <RecordSummary Record="record" />
+    }
+}
+
+@code {
+    public string Artist { get; set; } = string.Empty;
+    public List<Record>? Records { get; set; }
+    private string? _errorMessage;
+
+    private async Task _searchByArtist()
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(Artist))
+            {
+                _errorMessage = "Enter a valid Artist";
+                Records = null;
+                return;
+            }
+            HttpClient httpClient = new HttpClient();
+
+            Records = await httpClient.GetFromJsonAsync<List<Record>>(
+                $"https://localhost:7060/api/albums/artist/{Artist}"
+            );
+
+            _errorMessage = null;
+
+
+        }
+        catch (Exception)
+        {
+            Records = null;
+            _errorMessage = "No record found with that artist";
+        }
+    }
+
+}
+

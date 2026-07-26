@@ -1,0 +1,53 @@
+﻿@using RecordShop.Web.Components
+@using RecordShop.Web.Models
+<h3>SearchByTitle</h3>
+
+
+<InputText @bind-Value="Title"></InputText>
+<button type="button" @onclick="_searchByTitle">Search</button>
+
+
+
+@if (_errorMessage != null)
+{
+    <p>@_errorMessage</p>
+}
+else if (Record != null)
+{
+    <RecordSummary Record="Record" />
+}
+
+@code {
+    public string Title { get; set; } = string.Empty;
+    public Record? Record { get; set; }
+    private string? _errorMessage;
+
+    private async Task _searchByTitle()
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(Title))
+            {
+                _errorMessage = "Enter a valid Title";
+                Record = null;
+                return;
+            }
+            HttpClient httpClient = new HttpClient();
+
+            Record = await httpClient.GetFromJsonAsync<Record>(
+                $"https://localhost:7060/api/albums/title/{Title}"
+            );
+
+            _errorMessage = null;
+
+
+        }
+        catch (Exception)
+        {
+            Record = null;
+            _errorMessage = "No record found with that title";
+        }
+    }
+
+}
+
