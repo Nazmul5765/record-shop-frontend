@@ -1,10 +1,21 @@
-﻿@page "/search"
+@page "/search"
 
-<h3>SearchPage</h3>
+<div class="text-center mb-4">
+    <h1>Search Records</h1>
+    <p class="text-muted">Find records by ID, title, or artist.</p>
+</div>
 
-<SearchById /> 
-<SearchByTitle />
-<SearchByArtist />
+<div class="row g-4">
+    <div class="col-lg-4">
+        <SearchById />
+    </div>
+    <div class="col-lg-4">
+        <SearchByTitle />
+    </div>
+    <div class="col-lg-4">
+        <SearchByArtist />
+    </div>
+</div>
 
 @code {
 

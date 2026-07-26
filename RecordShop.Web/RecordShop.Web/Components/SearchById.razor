@@ -1,25 +1,32 @@
-﻿@using RecordShop.Web.Components
+@using RecordShop.Web.Components
 @using RecordShop.Web.Models
-<h3>SearchById</h3>
 
+<div class="card bg-dark text-light border-secondary h-100">
+    <div class="card-body">
+        <h3 class="card-title">Search by ID</h3>
+        <p class="text-light opacity-75">Enter a record ID to find one exact album.</p>
 
-    <InputNumber @bind-Value="Id"></InputNumber>
-    <button type="button" @onclick="_searchById">Search</button>
+        <div class="input-group mb-3">
+            <InputNumber class="form-control" @bind-Value="Id"></InputNumber>
+            <button class="btn btn-primary" type="button" @onclick="_searchById">Search</button>
+        </div>
 
-
-
-@if (_errorMessage != null)
-{
-    <p>@_errorMessage</p>
-}
-else if (Record != null)
-{
-    <RecordSummary Record="Record" />
-}
+        @if (_errorMessage != null)
+        {
+            <div class="alert alert-warning">
+                @_errorMessage
+            </div>
+        }
+        else if (Record != null)
+        {
+            <RecordSummary Record="Record" />
+        }
+    </div>
+</div>
 
 @code {
     public int Id { get; set; }
-    public Record? Record { get; set; } 
+    public Record? Record { get; set; }
     private string? _errorMessage;
 
     private async Task _searchById()
@@ -41,7 +48,7 @@ else if (Record != null)
             _errorMessage = null;
 
 
-        } catch (Exception ex)
+        } catch (Exception)
         {
             Record = null;
             _errorMessage = "No record found with that Id";

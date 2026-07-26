@@ -1,24 +1,31 @@
-﻿@using RecordShop.Web.Components
+@using RecordShop.Web.Components
 @using RecordShop.Web.Models
-<h3>SearchByArtist</h3>
 
+<div class="card bg-dark text-light border-secondary h-100">
+    <div class="card-body">
+        <h3 class="card-title">Search by Artist</h3>
+        <p class="text-light opacity-75">Find records by the artist name.</p>
 
-<InputText @bind-Value="Artist"></InputText>
-<button type="button" @onclick="_searchByArtist">Search</button>
+        <div class="input-group mb-3">
+            <InputText class="form-control" @bind-Value="Artist"></InputText>
+            <button class="btn btn-primary" type="button" @onclick="_searchByArtist">Search</button>
+        </div>
 
-
-
-@if (_errorMessage != null)
-{
-    <p>@_errorMessage</p>
-}
-else if (Records != null)
-{
-    @foreach (Record record in Records)
-    {
-        <RecordSummary Record="record" />
-    }
-}
+        @if (_errorMessage != null)
+        {
+            <div class="alert alert-warning">
+                @_errorMessage
+            </div>
+        }
+        else if (Records != null)
+        {
+            @foreach (Record record in Records)
+            {
+                <RecordSummary Record="record" />
+            }
+        }
+    </div>
+</div>
 
 @code {
     public string Artist { get; set; } = string.Empty;
@@ -53,4 +60,3 @@ else if (Records != null)
     }
 
 }
-
