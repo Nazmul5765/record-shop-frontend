@@ -1,26 +1,27 @@
-﻿@using RecordShop.Web.Models
+@using RecordShop.Web.Models
 @using RecordShop.Web.Components
-<h3>FeaturedRecord</h3>
 
-
+<h2 class="mb-3">Featured Record</h2>
 
 @if (errorMessage != null)
 {
-    <p>@errorMessage</p>
+    <div class="alert alert-warning">
+        @errorMessage
+    </div>
 }
 else if (featuredRecord == null)
 {
-    <p>Loading records</p>
+    <p class="text-muted">Loading records...</p>
 }
 else
 {
     <RecordSummary Record="featuredRecord" />
 }
 
-
 @code {
     private Record? featuredRecord;
     private string? errorMessage;
+
     [CascadingParameter]
     public List<Record>? Records { get; set; }
 
@@ -32,7 +33,7 @@ else
             if (Records == null || Records.Count == 0)
             {
                 errorMessage = "No records found";
-            } 
+            }
             else
             {
                 Random random = new Random();

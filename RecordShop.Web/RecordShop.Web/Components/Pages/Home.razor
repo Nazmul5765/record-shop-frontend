@@ -1,20 +1,29 @@
-﻿@page "/"
+@page "/"
 @using RecordShop.Web.Models
-
 
 <PageTitle>Home</PageTitle>
 
-<h2>Welcome to Midnight Groove!</h2>
+<section class="bg-dark text-light border border-secondary rounded p-5 mb-5 shadow-sm">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+            <h1 class="display-5 fw-bold">Welcome to Midnight Groove</h1>
+            <p class="lead text-light opacity-75">
+                Browse albums, check stock, and discover your next favourite record.
+            </p>
+        </div>
 
-<p>
-    Browse albums, check stock, and discover your next favourite record.
-</p>
+        <div class="col-lg-4 d-flex gap-2 justify-content-lg-end">
+            <a class="btn btn-primary" href="/records">Browse Records</a>
+            <a class="btn btn-outline-light" href="/search">Search</a>
+        </div>
+    </div>
+</section>
 
-
-
-<RecordsLoader>
-    <FeaturedRecord />
-</RecordsLoader>
+<section>
+    <RecordsLoader>
+        <FeaturedRecord />
+    </RecordsLoader>
+</section>
 
 @code
 {
