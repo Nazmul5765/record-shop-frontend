@@ -11,10 +11,16 @@ else if (Records.Count == 0)
 }
 else
 {
-    @foreach (Record record in Records)
-    {
-        <RecordSummary Record="record" />
-    }
+    <div class="row g3">
+
+        @foreach (Record record in Records)
+        {
+            <div class="col-md-6 col-lg-4">
+                <RecordSummary Record="record" />
+            </div>
+        }
+    </div>
+
 }
 
 @code {

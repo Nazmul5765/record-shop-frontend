@@ -1,8 +1,12 @@
 ﻿@using RecordShop.Web.Models
-    <NavLink href="@($"/records/{Record.Id}")">
-        <h4>@Record.Title</h4>
-        <p>@Record.Artist</p>
-        <p>@Record.Genre</p>
+    <NavLink href='@($"/records/{Record.Id}")' class="text-decoration-none text-dark">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">@Record.Title</h5>
+                <p class="card-subtitle text-muted">@Record.Artist</p>
+                <p class="card-text">@Record.Genre</p>
+            </div>
+        </div>
     </NavLink>
 
 

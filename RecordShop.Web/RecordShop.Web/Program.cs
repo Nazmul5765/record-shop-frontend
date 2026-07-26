@@ -1,5 +1,6 @@
 
 using RecordShop.Web.Components;
+using Microsoft.Extensions.FileProviders;
 
 namespace RecordShop.Web
 {
@@ -30,7 +31,11 @@ namespace RecordShop.Web
 
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(app.Environment.ContentRootPath, "wwwroot"))
+            });
             app.UseAntiforgery();
 
             app.MapRazorComponents<App>()
