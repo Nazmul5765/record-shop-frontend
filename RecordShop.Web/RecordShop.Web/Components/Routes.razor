@@ -6,9 +6,14 @@
 
     <NotFound>
         <LayoutView Layout="@typeof(Layout.MainLayout)">
-            <h1>404 - Page Not Found</h1>
-            <p>Sorry, this page doesn't exist.</p>
-            <a href="/">Go Home</a>
+            <div class="bg-dark text-light border border-secondary rounded p-5 text-center shadow-sm">
+                <p class="text-primary fw-bold mb-2">404</p>
+                <h1 class="display-6 fw-bold">Page Not Found</h1>
+                <p class="lead text-light opacity-75">
+                    Sorry, this page doesn't exist.
+                </p>
+                <a class="btn btn-primary" href="/">Go Home</a>
+            </div>
         </LayoutView>
     </NotFound>
 </Router>
