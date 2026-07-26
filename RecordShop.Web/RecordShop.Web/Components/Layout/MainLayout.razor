@@ -1,31 +1,19 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="is-flex is-flex-direction-column" style="min-height: 100vh;">
+<div class="d-flex flex-column min-vh-100">
     
-    <header class="hero is-dark">
-        <div class="hero-body">
-
-        <h1>Midnight Groove</h1>
-
-        <p>Classic records</p>
-
+    <header class="bg-dark text-light">
         <NavMenu />
-
-        </div>
-
     </header>
 
-    <main class="section is-flex-grow-1">
-
+    <main class="container flex-grow-1 py-4">
          @Body
-         
     </main>
 
-    <footer class="footer has-text-centered">
-        
-        <p>Nazmul Hussain - @DateTime.Now.Year</p>
-
+    <footer class="bg-dark text-light text-center py-3">  
+        <p class="mb-0">Nazmul Hussain - @DateTime.Now.Year</p>
     </footer>
+
 </div>
 
 <div id="blazor-error-ui">
