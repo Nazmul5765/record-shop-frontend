@@ -6,31 +6,55 @@
 @using RecordShop.Web.Components
 
 
-<h3>AddRecordForm</h3>
+<div class="card mx-auto shadow-sm border-primary" style="max-width: 600px;">
+    <div class="card-body">
+        <h4 class="card-title mb-4">Record Details</h4>
 
+        <EditForm Model="newRecord" OnValidSubmit="submit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
 
-<EditForm Model="newRecord" OnValidSubmit="submit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <label>Title</label>
-    <InputText @bind-Value="newRecord.Title" />
-    <label>Artist</label>
-    <InputText @bind-Value="newRecord.Artist" />
-    <label>Genre</label>
-    <InputText @bind-Value="newRecord.Genre" />
-    <label>ReleaseYear</label>
-    <InputNumber @bind-Value="newRecord.ReleaseYear" />
-    <label>Price</label>
-    <InputNumber @bind-Value="newRecord.Price" />
-    <label>StockQuantity</label>
-    <InputNumber @bind-Value="newRecord.StockQuantity" />
-    <button type="submit">Add Record</button>
-</EditForm>
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <InputText class="form-control" @bind-Value="newRecord.Title" />
+            </div>
 
-@if (createdMessage != null)
-{
-    <p>@createdMessage</p>
-}
+            <div class="mb-3">
+                <label class="form-label">Artist</label>
+                <InputText class="form-control" @bind-Value="newRecord.Artist" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Genre</label>
+                <InputText class="form-control" @bind-Value="newRecord.Genre" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Release Year</label>
+                <InputNumber class="form-control" @bind-Value="newRecord.ReleaseYear" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Price</label>
+                <InputNumber class="form-control" @bind-Value="newRecord.Price" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Stock Quantity</label>
+                <InputNumber class="form-control" @bind-Value="newRecord.StockQuantity" />
+            </div>
+
+            <button class="btn btn-primary" type="submit">Add Record</button>
+        </EditForm>
+
+        @if (createdMessage != null)
+        {
+            <div class="alert alert-success mt-3">
+                @createdMessage
+            </div>
+        }
+    </div>
+</div>
 
 @code {
     private string? createdMessage;
