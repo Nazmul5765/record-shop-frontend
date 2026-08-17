@@ -15,6 +15,13 @@ namespace RecordShop.Web
                 .AddInteractiveServerComponents()
                 .AddInteractiveWebAssemblyComponents();
 
+            var apiBaseUrl = builder.Configuration["ApiBaseUrl"];
+
+            builder.Services.AddScoped(sp => new HttpClient
+            {
+                BaseAddress = new Uri(apiBaseUrl!)
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

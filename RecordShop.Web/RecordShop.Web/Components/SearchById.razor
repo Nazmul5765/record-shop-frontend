@@ -1,5 +1,6 @@
 @using RecordShop.Web.Components
 @using RecordShop.Web.Models
+@inject HttpClient http
 
 <div class="card bg-dark text-light border-secondary h-100">
     <div class="card-body">
@@ -39,10 +40,9 @@
                 Record = null;
                 return;
             }
-            HttpClient httpClient = new HttpClient();
 
-            Record = await httpClient.GetFromJsonAsync<Record>(
-                $"https://localhost:7060/api/albums/{Id}"
+            Record = await http.GetFromJsonAsync<Record>(
+                $"api/albums/{Id}"
             );
 
             _errorMessage = null;

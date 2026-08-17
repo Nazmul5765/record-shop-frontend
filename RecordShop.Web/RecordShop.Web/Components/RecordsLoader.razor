@@ -1,6 +1,7 @@
 ﻿@using RecordShop.Web.Models
 @using RecordShop.Web.Components
 @using System.Net.Http.Json
+@inject HttpClient http
 
 @if (errorMessage != null)
 {
@@ -33,10 +34,9 @@ else
         
         try
         {
-            var http = new HttpClient();
 
                 records = await http.GetFromJsonAsync<List<Record>>(
-                "https://localhost:7060/api/albums"
+                "api/albums"
 
             );
         }
