@@ -14,7 +14,7 @@ public class ApiClient
 
     public async Task<T?> GetWithRetryAsync<T>(string requestUri)
     {
-        const int maxAttempts = 8;
+        const int maxAttempts = 12;
 
         for (var attempt = 1; attempt <= maxAttempts; attempt++)
         {
@@ -47,7 +47,7 @@ public class ApiClient
                 // The API may still be waking up.
             }
 
-            await Task.Delay(TimeSpan.FromSeconds(7));
+            await Task.Delay(TimeSpan.FromSeconds(8));
         }
 
         throw new HttpRequestException(
