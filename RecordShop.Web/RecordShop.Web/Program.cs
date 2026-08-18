@@ -36,6 +36,7 @@ namespace RecordShop.Web
                 app.UseHsts();
             }
 
+            app.UseStatusCodePagesWithReExecute("/not-found");
             app.UseHttpsRedirection();
 
             app.UseStaticFiles(new StaticFileOptions
