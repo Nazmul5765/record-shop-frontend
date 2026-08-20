@@ -1,8 +1,7 @@
 ﻿@using RecordShop.Web.Models
 @using RecordShop.Web.Components
 @using System.Net.Http.Json
-@using RecordShop.Web.Services
-@inject ApiClient ApiClient
+@inject HttpClient http
 
 @if (errorMessage != null)
 {
@@ -36,7 +35,7 @@ else
         try
         {
 
-                records = await ApiClient.GetWithRetryAsync<List<Record>>(
+                records = await http.GetFromJsonAsync<List<Record>>(
                 "api/albums"
 
             );

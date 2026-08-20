@@ -1,7 +1,5 @@
-
 using RecordShop.Web.Components;
 using Microsoft.Extensions.FileProviders;
-using RecordShop.Web.Services;
 
 namespace RecordShop.Web
 {
@@ -23,7 +21,6 @@ namespace RecordShop.Web
                 BaseAddress = new Uri(apiBaseUrl!)
             });
 
-            builder.Services.AddScoped<ApiClient>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
