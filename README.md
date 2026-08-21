@@ -1,42 +1,52 @@
 # Record Shop Frontend
 
-A Blazor Web App frontend for browsing and managing records in the Midnight Groove record shop.
+The Blazor frontend for my full-stack Record Shop application, built as my solo project during the Northcoders Enterprise Engineering Bootcamp.
 
-This project allows users to browse records, view record details, add new records, update existing records, delete records and search the catalogue.
+The application provides a user interface for browsing and managing a record catalogue. Users can view records, search the catalogue, add new records, update existing records and remove records.
 
-The frontend communicates with the Record Shop API using `HttpClient` and displays data returned from the backend API.
+The frontend communicates with a separate ASP.NET Core Web API using `HttpClient`, keeping the user interface separate from the backend business logic and database access.
+
+## Live Application
+
+**Live Demo:** https://recordshop.nazmulhussain.co.uk
+
+**Backend Repository:** https://github.com/Nazmul5765/record-shop-api
 
 ---
 
 # Features
 
-## Core Features
+## Record Management
 
-- View all records
-- View a single record by ID
-- Add a new record
-- Update record details
+- Browse all records in the catalogue
+- View individual record details
+- Add new records
+- Update existing record information
 - Delete records
 - Navigate between pages using Blazor routing
 - Display a custom 404 page for unknown routes
 
-## Search Features
+## Search
 
-- Search for a record by ID
-- Search for a record by title
-- Search for records by artist
+Users can search the catalogue by:
 
-## Homepage Features
+- Record ID
+- Title
+- Artist
 
-- Welcome section for Midnight Groove
-- Featured record selected from the record collection
-- Quick navigation to browse and search records
+## Homepage
 
-## Validation
+The homepage includes:
 
-The frontend uses data annotation validation to check form input before sending create or update requests to the API.
+- A welcome section for Midnight Groove
+- A featured record selected from the record collection
+- Quick navigation to browse or search the catalogue
 
-Validation is used for:
+## Form Validation
+
+The add and edit forms use data annotation validation to check user input before requests are sent to the API.
+
+Validation is applied to:
 
 - Title
 - Artist
@@ -44,18 +54,6 @@ Validation is used for:
 - Release year
 - Price
 - Stock quantity
-
-## Styling
-
-The application uses Bootstrap for layout and styling.
-
-The current design uses a dark theme with:
-
-- Dark cards
-- Light text
-- Bootstrap buttons
-- Responsive record grids
-- Styled forms and search panels
 
 ---
 
@@ -70,6 +68,7 @@ The current design uses a dark theme with:
 - CSS
 - HttpClient
 - System.Net.Http.Json
+- Docker
 
 ---
 
@@ -81,11 +80,13 @@ The frontend is organised around Blazor pages and reusable components.
 Pages → Loader Components → Display/Form Components → Backend API
 ```
 
-- Pages define routes and page-level layout
-- Loader components request data from the backend API
-- Display components render record information
-- Form components collect and validate user input
-- `HttpClient` sends HTTP requests to the API
+- **Pages** define application routes and page-level layouts.
+- **Loader components** request data from the backend API.
+- **Display components** render record information.
+- **Form components** collect and validate user input.
+- **HttpClient** handles communication with the backend API.
+
+This structure separates data loading, presentation and user interaction into smaller components.
 
 ---
 
@@ -93,25 +94,55 @@ Pages → Loader Components → Display/Form Components → Backend API
 
 The frontend does not access the database directly.
 
-Instead, the data flows through the application like this:
+Instead, requests flow through the full-stack application like this:
 
 ```text
-User action → Blazor component → HttpClient request → Backend API → Service/Repository → Database
+User action
+    ↓
+Blazor component
+    ↓
+HttpClient request
+    ↓
+ASP.NET Core Web API
+    ↓
+Service layer
+    ↓
+Repository layer
+    ↓
+PostgreSQL database
 ```
 
-Example flow for viewing a single record:
+For example, when a user views an individual record:
 
 ```text
-/records/3 → RecordPage → RecordLoader → GET /api/albums/3 → API response → RecordDetails
+/records/3
+    ↓
+Record page
+    ↓
+RecordLoader
+    ↓
+GET /api/albums/3
+    ↓
+API response
+    ↓
+RecordDetails
 ```
 
-Example flow for adding a new record:
+When a user adds a record:
 
 ```text
-AddRecordForm → POST /api/albums → Backend saves record → Success message shown
+AddRecordForm
+    ↓
+POST /api/albums
+    ↓
+Backend processes the request
+    ↓
+Record stored in the database
+    ↓
+Success response returned to the frontend
 ```
 
-This separation keeps the frontend responsible for user interaction and display, while the backend handles API requests, business logic and database access.
+This separation keeps the frontend responsible for presentation and user interaction while the backend handles API requests, application logic and persistent data storage.
 
 ---
 
@@ -121,30 +152,26 @@ This separation keeps the frontend responsible for user interaction and display,
 |---|---|
 | `/` | Homepage with welcome section and featured record |
 | `/records` | View all records |
-| `/records/{id}` | View, edit or delete a single record |
+| `/records/{id}` | View, edit or delete an individual record |
 | `/records/add` | Add a new record |
 | `/search` | Search records by ID, title or artist |
-| `/about` | About page for Midnight Groove |
+| `/about` | About Midnight Groove |
 | Unknown routes | Custom 404 page |
 
 ---
 
 # API Integration
 
-The frontend calls the backend API using `HttpClient`.
+The frontend communicates with the Record Shop ASP.NET Core Web API using `HttpClient`.
 
-The API is expected to run at:
-
-```text
-https://localhost:7060
-```
+The API base URL is configured separately from the application code, allowing the frontend to communicate with the appropriate API when running locally or in production.
 
 Main API endpoints used by the frontend:
 
 | Method | Endpoint | Used For |
 |---|---|---|
 | GET | `/api/albums` | Load all records |
-| GET | `/api/albums/{id}` | Load one record |
+| GET | `/api/albums/{id}` | Load an individual record |
 | POST | `/api/albums` | Add a new record |
 | PUT | `/api/albums/{id}` | Update a record |
 | DELETE | `/api/albums/{id}` | Delete a record |
@@ -153,76 +180,116 @@ Main API endpoints used by the frontend:
 
 ---
 
-# Design Patterns and Concepts
+# Component Design
 
-## Component-Based UI
+## Reusable Components
 
-The application is split into smaller Blazor components such as `RecordSummary`, `RecordDetails`, `RecordsLoader` and `AddRecordForm`.
+The application is split into smaller Blazor components including components for record summaries, record details, loading data and forms.
 
-This helps keep the UI easier to understand, reuse and maintain.
+This keeps individual components focused on a particular responsibility and makes the application easier to maintain.
 
 ## Loader Components
 
-Components such as `RecordsLoader` and `RecordLoader` are responsible for fetching data from the API.
+Components such as `RecordsLoader` and `RecordLoader` are responsible for requesting data from the backend API.
 
-This separates data loading from display components.
+This separates API communication from components primarily responsible for displaying information.
 
 ## Cascading Parameters
 
-`RecordsLoader` uses cascading values to share loaded records with child components such as the all records list and featured record.
+`RecordsLoader` uses cascading values to make loaded record data available to child components.
 
-This avoids passing the same data through several layers of components manually.
+This allows components such as the record list and featured record to use the loaded data without manually passing it through several component levels.
 
 ## Forms and Validation
 
-The add and edit forms use Blazor `EditForm` and data annotations to validate user input before sending requests to the backend.
+The add and edit functionality uses Blazor `EditForm` components and data annotations to validate user input before requests are sent to the API.
 
 ---
 
-# Running the Project
+# Deployment
 
-## Start the Backend API
+The frontend is deployed as part of the full-stack Record Shop application.
 
-The backend API should be running first.
+The frontend and backend are maintained as separate applications and deployed independently.
 
-From the backend project:
-
-```bash
-dotnet run --launch-profile https
+```text
+User
+  ↓
+Blazor Frontend
+  ↓
+ASP.NET Core API
+  ↓
+PostgreSQL
 ```
 
-The API should run at:
+The frontend is:
+
+- Containerised using Docker
+- Deployed on Railway
+- Configured to communicate with the deployed backend API
+- Available through a custom domain
+
+The backend is deployed separately on Railway and uses a PostgreSQL database hosted on Neon.
+
+This deployment process gave me practical experience moving an application from a local development environment to a production environment and configuring communication between independently deployed frontend and backend services.
+
+---
+
+# Running Locally
+
+The frontend requires the Record Shop backend API to access record data.
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/Nazmul5765/record-shop-frontend.git
+```
+
+## 2. Start the Backend API
+
+Clone and run the backend project:
+
+```text
+https://github.com/Nazmul5765/record-shop-api
+```
+
+When using the local development configuration, the API runs at:
 
 ```text
 https://localhost:7060
 ```
 
-## Start the Frontend
+## 3. Start the Frontend
 
-From the frontend project:
+Navigate to the frontend project and run:
 
 ```bash
-cd RecordShop.Web/RecordShop.Web/RecordShop.Web
 dotnet watch run
 ```
 
-Or run with a specific launch profile:
+Alternatively:
 
 ```bash
 dotnet run --launch-profile https
 ```
 
-The frontend should run at:
+The local development URL depends on the configured launch profile.
 
-```text
-https://localhost:7024
-```
+---
 
-or:
+# Styling
 
-```text
-http://localhost:5059
-```
+The application uses Bootstrap alongside custom CSS to create a responsive dark-themed interface.
+
+The interface includes:
+
+- Responsive record grids
+- Record cards
+- Styled forms
+- Search panels
+- Responsive navigation
+- Consistent buttons and controls
+- Dark backgrounds with contrasting text
 
 ---
 
@@ -230,20 +297,23 @@ http://localhost:5059
 
 Possible future improvements include:
 
-- Improve the visual design further
-- Add pagination for large record collections
-- Investigate Blazor `Virtualize` for long record lists
-- Add backend validation to protect against invalid API requests
-- Add sorting options for search results
-- Add advanced search filters for genre, price and release year
-- Add search autocomplete with debounced input
-- Improve the featured record into a carousel
-- Add user ratings for records
-- Add authentication for protected actions
-- Only allow logged-in users to add, update or delete records
-- Add a shopping cart
-- Track stock more carefully during checkout
-- Add automated frontend tests
+- Add pagination for larger record collections
+- Add sorting and additional filtering options
+- Add search autocomplete
+- Improve the featured record section
+- Add user ratings
+- Add authentication and protected record-management actions
+- Add shopping basket functionality
+- Improve stock management for purchasing
+- Add automated frontend testing
+
+---
+
+# Related Repository
+
+The ASP.NET Core backend API for this application is available here:
+
+**Record Shop API:** https://github.com/Nazmul5765/record-shop-api
 
 ---
 
